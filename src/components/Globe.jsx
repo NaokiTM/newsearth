@@ -1,6 +1,13 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { useState } from 'react';
+
+const apiKey = import.meta.env.REACT_APP_NEWS_API_KEY; 
+const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error fetching news:', error));
 
 const Sphere = () => {
     return (
@@ -14,7 +21,7 @@ const Sphere = () => {
 const Globe = () => {
   return (
     <>
-    <div className='w-[500px] h-[500px] border-2'>
+    <div className='w-[400px] h-[400px] border-2'>
         <Canvas classname = 'w-full h-full'camera={{position: [0,0,5], fov: 75}}>
             <ambientLight intensity={0.5} />
             <directionalLight position={[5, 5, 5]} intensity={1} />
