@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+html,
+body,
+#root { /* or the element your React app mounts to */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
