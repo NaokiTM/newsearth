@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 
+
 const apiKey = import.meta.env.REACT_APP_NEWS_API_KEY; 
 const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
 
