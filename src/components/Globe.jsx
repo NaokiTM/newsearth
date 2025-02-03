@@ -24,16 +24,18 @@ const Sphere = () => {
 const Globe = () => {
   return (
     <>
-    <div className='w-[400px] h-[400px]'>
-        <Canvas classname = 'w-full h-full'camera={{position: [0,0,5], fov: 75}}>
-            <ambientLight intensity={4} />
-            <directionalLight position={[5, 5, 5]} intensity={1} />
-            <Sphere />
-            <OrbitControls enableZoom={false}
-            // maxPolarAngle={Math.PI / 2} 
-            // minPolarAngle={Math.PI / 2} 
-            />
-        </Canvas>
+    <div className='flex items-center justify-center'>
+        <div className='w-[400px] h-[400px]'>
+            <Canvas classname = 'w-full h-full'camera={{position: [0,0,5], fov: 75}}>
+                <ambientLight intensity={4} />
+                <directionalLight position={[5, 5, 5]} intensity={1} />
+                <Sphere />
+                <OrbitControls enableZoom={false}
+                // maxPolarAngle={Math.PI / 2} 
+                // minPolarAngle={Math.PI / 2} 
+                />
+            </Canvas>
+        </div>
     </div>
     </>
   )
