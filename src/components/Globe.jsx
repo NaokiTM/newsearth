@@ -15,42 +15,9 @@ const Sphere = () => {
 };
 
 const Globe = () => {
-    // all of this used for sorting through subjects when filtering articles around the earth. 
-    // const [articles, setArticles] = useState([]);
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
-    // const [subject, setSubject] = useState("bitcoin")
-
-    // const changeSubject = (event) => {
-    //   setSubject(event.target.value)
-    // }
-
-    // useEffect(() => {
-    //     const fetchArticles = async () => {
-    //       try {
-    //         const apiKey = import.meta.env.VITE_NEWS_API_KEY; // Use environment variables
-    //         const response = await fetch(
-    //           `https://newsapi.org/v2/everything?q=${subject}&apiKey=&apiKey=${ apiKey }`
-    //         );
-    //         if (!response.ok) throw new Error("Failed to fetch news");
-    //         const data = await response.json();
-    //         setArticles(data.articles); // Update state with fetched data
-    //       } catch (error) {
-    //         setError(error.message);
-    //       } finally {
-    //         setLoading(false);
-    //       }
-    //     };
-    
-    //     fetchArticles();
-    //   }, []);
-
-
   return (
     <div className='flex flex-row'>
         <div className='flex flex-col justify-center items-center w-1/2'>
-            
-
             {/* <div className="text-5xl p-4 italic">Headlines</div>
                 <div className="flex flex-row space-x-2 italic pb-4">
                 <div>Sort by subject:</div>
@@ -66,7 +33,7 @@ const Globe = () => {
                 <div>Planet Earths digital interactive newspaper.</div>
             </div>
             <div className='w-[400px] h-[400px]'>
-                <Canvas classname = 'w-full h-full'camera={{position: [0,0,5], fov: 75}}>
+                <Canvas className = 'w-full h-full'camera={{position: [0,0,5], fov: 75}}>
                     <ambientLight intensity={4} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
                     <Sphere />

@@ -3,53 +3,52 @@ import { useState, useEffect } from "react";
 
 const Headlines = () => {
     const [articles, setArticles] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [headlineSource, setHeadlineSource] = useState("US")
+    const [index, setIndex] = useState(0);
 
-    const changeSource = (event) => {
-      setHeadlineSource(event.target.value)
-    }
+    const nextCard = () => setIndex((prev) => (prev + 1) % articles.length);
+    const prevCard = () => setIndex((prev) => (prev - 1 + articles.length) % articles.length);
   
     useEffect(() => {
       const fetchNews = async () => {
         try {
-          const apiKey = import.meta.env.VITE_NEWS_API_KEY; // Use environment variables
+          const apiKey = import.meta.env.VITE_NEWS_API_KEY;
           const response = await fetch(
-            `https://newsapi.org/v2/top-headlines?country=${ headlineSource }&apiKey=${ apiKey }`
+            `https://newsapi.org/v2/top-headlines?country=US&apiKey=${ apiKey }`
           );
           if (!response.ok) throw new Error("Failed to fetch news");
           const data = await response.json();
           setArticles(data.articles); // Update state with fetched data
         } catch (error) {
           setError(error.message);
-        } finally {
-          setLoading(false);
-        }
+        } 
       };
   
       fetchNews();
-    }, [headlineSource]);
+    }, []);
 
   return (
     <div className="">
         <div className="flex flex-col items-center justify-center text-red-600 text-l font-extrabold tracking-tight">
-        <div className="text-5xl p-4 italic text-">US Headlines</div>
-          {articles.map((article, index) => (
-            <li key={index} className="border-b pb-2">
-              {article.title}
+          <div className="text-5xl p-4 italic text-">US Headlines</div>
 
+          
+          {articles.length > 0 && (
+          <div className="w-80 text-center p-4 shadow-lg"> 
+              <h2 className="text-xl font-bold">{articles[index].title}</h2>
               <img
-                src={article.urlToImage}
-                alt={article.title} //replace with text that indicates that its an image
+                src={articles[index].urlToImage}
+                alt={articles[index].title} //replace with text that indicates that its an image
                 className="w-full max-h-60 content-cover rounded-md my-2"
               />
+              <p className="text-gray-600">{articles[index].description}</p>
+          </div>
+          )}
 
-              <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                {article.title}
-              </a>
-            </li>
-          ))}
+          <div className="flex space-x-4">
+            <button onClick={prevCard}>Previous</button>
+            <button onClick={nextCard}>Next</button>
+          </div>
         </div>
     </div>
   )
