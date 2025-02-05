@@ -4,7 +4,7 @@ import Headlines from './components/Headlines'
 function App() {
   return (
     <>
-    <div className='flex'>
+    <div className='flex h-full'>
       <div className='w-2/3'>
           <Globe className='flex flex-1 justify-center items-center w-full' /> 
       </div>
