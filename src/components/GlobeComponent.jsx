@@ -1,8 +1,9 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 import { useState, useEffect } from 'react';
+import * as d3 from "d3-geo";
 
-const Sphere = () => {
+const Globe = () => {
     const earthTexture = useTexture('/earth.jpg')
 
     return (
@@ -14,7 +15,8 @@ const Sphere = () => {
     );
 };
 
-const Globe = () => {
+const GlobeComponent = () => {
+
   return (
     <div className='flex flex-row'>
         <div className='flex flex-col justify-center items-center w-1/2'>
@@ -36,7 +38,7 @@ const Globe = () => {
                 <Canvas className = 'w-full h-full'camera={{position: [0,0,5], fov: 75}}>
                     <ambientLight intensity={4} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
-                    <Sphere />
+                    <Globe />
                     <OrbitControls enableZoom={false}
                     // maxPolarAngle={Math.PI / 2} 
                     // minPolarAngle={Math.PI / 2} 
@@ -48,4 +50,4 @@ const Globe = () => {
   )
 }
 
-export default Globe
+export default GlobeComponent
