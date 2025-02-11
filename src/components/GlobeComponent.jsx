@@ -1,13 +1,43 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as d3 from "d3-geo";
 
-const Globe = () => {
+const Globe = ({ setClickedSection }) => {
     const earthTexture = useTexture('/earth.jpg')
+    const globeRef = useRef()
+
+    // Helper function to convert cartesian to spherical coordinates
+    const cartesianToSpherical = (x, y, z) => {
+        const radius = Math.sqrt(x * x + y * y + z * z);
+        const theta = Math.atan2(y, x); // longitude (horizontal)
+        const phi = Math.acos(z / radius); // latitude (vertical)
+        return { radius, theta, phi };
+    };
+
+    // A simple function to determine the section based on spherical coordinates
+    const determineSection = (theta, phi) => {
+        const latSection = Math.floor((phi / Math.PI) * 4); // Dividing into 4 sections by latitude
+        const longSection = Math.floor((theta / (Math.PI * 2)) * 8); // Dividing into 8 sections by longitude
+        return `Section ${latSection + 1}, ${longSection + 1}`;
+    };
+
+    // responsible for handling when a country is clicked, and opens articles according to the selected country
+    const handleGlobeClick= (event) => {
+        const clickedPoint = event.point
+        
+        
+        // Convert to spherical coordinates (latitude and longitude)
+        const { x, y, z } = clickedPoint;
+        const { theta, phi } = cartesianToSpherical(x, y, z);
+
+        // Example of defining regions based on latitude (phi) and longitude (theta)
+        const section = determineSection(theta, phi);
+        setClickedSection(section);
+    }
 
     return (
-        <mesh scale={0.75} rotation={[0, Math.PI / 2, 0]}>
+        <mesh ref={globeRef} onClick = {handleGlobeClick} scale={0.75} rotation={[0, Math.PI / 2, 0]}>
             <sphereGeometry args={[4, 64, 64]} />
             {/* <meshStandardMaterial color="royalblue" /> */}
             <meshStandardMaterial map={earthTexture} />
@@ -16,18 +46,13 @@ const Globe = () => {
 };
 
 const GlobeComponent = () => {
+    const [clickedSection, setClickedSection] = useState(null)
 
   return (
     <div className='flex flex-row'>
         <div className='flex flex-col justify-center items-center w-1/2'>
-            {/* <div className="text-5xl p-4 italic">Headlines</div>
-                <div className="flex flex-row space-x-2 italic pb-4">
-                <div>Sort by subject:</div>
-                <select id="options" className="border border-gray-300 rounded-md cursor-pointer">
-                    <option value="US" onChange={ changeSubject }>Bitcoin</option>
-                    <option value="GB" onChange={ changeSubject }>United Kingdom headlines</option>
-                </select>
-            </div> */}
+            {/* opened articles show up in here */}
+            <div>{clickedSection}</div>
         </div >
         <div className='flex flex-col items-center justify-center w-1/2'>
             <div className="flex flex-col items-center justify-center pb-8 pt-2 italic font-bold tracking-tight">
@@ -38,11 +63,8 @@ const GlobeComponent = () => {
                 <Canvas className = 'w-full h-full'camera={{position: [0,0,5], fov: 75}}>
                     <ambientLight intensity={4} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
-                    <Globe />
-                    <OrbitControls enableZoom={false}
-                    // maxPolarAngle={Math.PI / 2} 
-                    // minPolarAngle={Math.PI / 2} 
-                    />
+                    <Globe setClickedSection={setClickedSection}/>
+                    <OrbitControls enableZoom={false} />
                 </Canvas>
             </div>
         </div>
