@@ -3,6 +3,8 @@ import { OrbitControls, useTexture } from '@react-three/drei';
 import { useState, useEffect, useRef } from 'react';
 // import * as d3 from "d3-geo";
 
+
+
 const Globe = ({ setClickedSection }) => {
     const earthTexture = useTexture('/earth.jpg')
     const globeRef = useRef()
@@ -37,11 +39,13 @@ const Globe = ({ setClickedSection }) => {
     }
 
     return (
-        <mesh ref={globeRef} onClick = {handleGlobeClick} scale={0.75} rotation={[0, Math.PI / 2, 0]}>
-            <sphereGeometry args={[4, 64, 64]} />
-            {/* <meshStandardMaterial color="royalblue" /> */}
-            <meshStandardMaterial map={earthTexture} />
-        </mesh>
+        <>
+            <mesh ref={globeRef} onClick = {handleGlobeClick} scale={0.75} rotation={[0, Math.PI / 2, 0]}>
+                <sphereGeometry args={[4, 64, 64]} />
+                {/* <meshStandardMaterial color="royalblue" /> */}
+                <meshStandardMaterial map={earthTexture} />
+            </mesh>
+        </>
     );
 };
 
@@ -77,8 +81,8 @@ const GlobeComponent = () => {
             </div>
         </div >
         <div className='flex flex-col items-center justify-center w-1/2'>
-            <div className="flex flex-col items-center justify-center pb-8 pt-2 italic font-bold tracking-tight">
-                <div className="text-7xl ">The Globe</div>
+            <div className="flex flex-col items-center justify-center pb-8 pt-2 tracking-tight">
+                <div className="text-5xl ">The Globe</div>
                 <div>Planet Earths digital interactive newspaper.</div>
             </div>
             <div className='w-[400px] h-[400px]'>
