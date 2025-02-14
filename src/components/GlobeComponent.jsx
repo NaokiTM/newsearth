@@ -82,11 +82,10 @@ const GlobeComponent = () => {
         </div >
         <div className='flex flex-col items-center justify-center w-1/2'>
             <div className="flex flex-col items-center justify-center pb-8 pt-2 tracking-tight">
-                <div className="text-5xl ">The Globe</div>
-                <div>Planet Earths digital interactive newspaper.</div>
+                <img src="/Globe.png" alt="Globe" className='max-h-25'></img>
             </div>
             <div className='w-[400px] h-[400px]'>
-                <Canvas className = 'w-full h-full'camera={{position: [0,0,5], fov: 75}}>
+                <Canvas className = 'w-full h-full'camera={{position: [0,0,5], fov: 90}}>
                     <ambientLight intensity={4} />
                     <directionalLight position={[5, 5, 5]} intensity={1} />
                     <Globe setClickedSection={setClickedSection}/>
