@@ -12,3 +12,12 @@ body,
   margin: 0;
   padding: 0;
 }
+
+@keyframes marquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.animate {
+  animation: marquee 6s linear infinite;
+}

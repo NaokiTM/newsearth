@@ -29,10 +29,10 @@ const LoadArticles = () => {
   return (
     <>
         {articles.length > 0 && (
-            <div className="w-80 text-center p-4 shadow-lg h-[75vh] overflow-y-auto flex flex-col"> 
+            <div className="w-80 text-center rounded-2xl p-4 shadow-lg shadow-red-600 h-[75vh] overflow-y-auto flex flex-col"> 
 
                 {/* article title */}
-                <h2 className="text-xl font-bold">{articles[index].title}</h2>
+                <h2 className="text-l font-bold text-red-500">{articles[index].title}</h2>
 
                 {/* article image */}
                 <img
@@ -51,7 +51,7 @@ const LoadArticles = () => {
             </div>
         )}
 
-        <div className="flex space-x-4 pt-8">
+        <div className="flex space-x-4 pt-8 justify-center items-center text-red-500">
             <button className="cursor-pointer" onClick={prevCard}>Previous</button>
             <button className="cursor-pointer" onClick={nextCard}>Next</button>
         </div>

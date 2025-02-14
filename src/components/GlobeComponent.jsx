@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 import { useState, useEffect, useRef } from 'react';
+import LoadArticles from './LoadArticles';
 // import * as d3 from "d3-geo";
 
 
@@ -56,33 +57,16 @@ const GlobeComponent = () => {
     <div className='flex flex-row'>
         <div className='flex flex-col justify-center items-center w-1/2'>
             {/* opened articles show up in here */}
-            <div className="w-90 text-center p-8 mt-8 shadow-xl h-[90vh] overflow-y-auto flex flex-col"> 
-                <div>
-                    {clickedSection}
-
-                    {/* article title */}
-                    <h2 className="text-xl font-bold">article title</h2>
-
-                    {/* article image */}
-                    <img
-                    // src={articles[index].urlToImage}
-                    // alt={articles[index].title} //replace with text that indicates that its an image
-                    className="w-full max-h-60 content-cover rounded-md my-2"
-                    />
-
-                    {/* article description */}
-                    <div className="pb-4 overflow-y-auto mb-2">
-                    <p className="text-gray-600">article description</p>
-                    </div>
-
-                    {/* article URL */}
-                    <a className="hover:underline text-blue-500">Read more on this article</a>
+            <div className="text-center shadow-xl overflow-y-auto flex flex-col"> 
+               <div className="flex flex-col items-center text-2xl p-4 font-bold justify-center text-red-600 text-l tracking-tight">
+                Current Article: 
                 </div>
+                <LoadArticles />
             </div>
         </div >
         <div className='flex flex-col items-center justify-center w-1/2'>
             <div className="flex flex-col items-center justify-center pb-8 pt-2 tracking-tight">
-                <img src="/Globe.png" alt="Globe" className='max-h-25'></img>
+                <img src="/Globe.png" alt="Globe" className='max-h-20'></img>
             </div>
             <div className='w-[400px] h-[400px]'>
                 <Canvas className = 'w-full h-full'camera={{position: [0,0,5], fov: 90}}>
